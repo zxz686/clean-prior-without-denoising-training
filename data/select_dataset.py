@@ -17,78 +17,12 @@ def define_Dataset(dataset_opt):
     # -----------------------------------------
     # denoising
     # -----------------------------------------
-    elif dataset_type in ['srresnet_denoising']:
-        from data.dataset_srresnet import DatasetSRResnetDenoising as D
 
-    elif dataset_type in ['srresnet2_denoising']:
-        from data.dataset_srresnet2 import DatasetSRResnet2Denoising as D
-
-    elif dataset_type in ['mem_denoising']:
-        from data.dataset_mem import DatasetMemDenoising as D
-    
     elif dataset_type in ['catt_denoising']:
         from data.dataset_catt import DatasetCAttDenoising as D
-    
-    elif dataset_type in ['noise2noise_denoising']:
-        from data.dataset_noise2noise import DatasetNoise2NoiseDenoising as D
 
-    elif dataset_type in ['resnet101_sa_denoising']:
-        from data.dataset_resnet101_sa import DatasetResnetDenoising as D
 
-    elif dataset_type in ['masked_denoising']:
-        from data.dataset_masked_denoising import DatasetMaskedDenoising as D
 
-    elif dataset_type in ['dncnn', 'denoising']:
-        from data.dataset_dncnn import DatasetDnCNN as D
-
-    elif dataset_type in ['dnpatch']:
-        from data.dataset_dnpatch import DatasetDnPatch as D
-
-    elif dataset_type in ['ffdnet', 'denoising-noiselevel']:
-        from data.dataset_ffdnet import DatasetFFDNet as D
-
-    elif dataset_type in ['fdncnn', 'denoising-noiselevelmap']:
-        from data.dataset_fdncnn import DatasetFDnCNN as D
-
-    # -----------------------------------------
-    # super-resolution
-    # -----------------------------------------
-    elif dataset_type in ['sr', 'super-resolution']:
-        from data.dataset_sr import DatasetSR as D
-
-    elif dataset_type in ['srmd']:
-        from data.dataset_srmd import DatasetSRMD as D
-
-    elif dataset_type in ['dpsr', 'dnsr']:
-        from data.dataset_dpsr import DatasetDPSR as D
-
-    elif dataset_type in ['usrnet', 'usrgan']:
-        from data.dataset_usrnet import DatasetUSRNet as D
-
-    elif dataset_type in ['bsrnet', 'bsrgan', 'blindsr']:
-        from data.dataset_blindsr import DatasetBlindSR as D
-
-    # -------------------------------------------------
-    # JPEG compression artifact reduction (deblocking)
-    # -------------------------------------------------
-    elif dataset_type in ['jpeg']:
-        from data.dataset_jpeg import DatasetJPEG as D
-
-    # -----------------------------------------
-    # video restoration
-    # -----------------------------------------
-    elif dataset_type in ['videorecurrenttraindataset']:
-        from data.dataset_video_train import VideoRecurrentTrainDataset as D
-    elif dataset_type in ['videorecurrenttrainnonblinddenoisingdataset']:
-        from data.dataset_video_train import VideoRecurrentTrainNonblindDenoisingDataset as D
-    elif dataset_type in ['videorecurrenttrainvimeodataset']:
-        from data.dataset_video_train import VideoRecurrentTrainVimeoDataset as D
-    elif dataset_type in ['videorecurrenttestdataset']:
-        from data.dataset_video_test import VideoRecurrentTestDataset as D
-    elif dataset_type in ['singlevideorecurrenttestdataset']:
-        from data.dataset_video_test import SingleVideoRecurrentTestDataset as D
-    elif dataset_type in ['videotestvimeo90kdataset']:
-        from data.dataset_video_test import VideoTestVimeo90KDataset as D
 
     # -----------------------------------------
     # common

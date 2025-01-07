@@ -1,0 +1,79 @@
+{
+    "task": "CAtt"   // real-world image sr. root/task/images-models-options
+    , "model": "catt"      // "plain" | "plain2" if two inputs
+    , "gpu_ids": [0,1]
+    , "dist": false
+  
+    , "scale": 1       // broadcast to "datasets"
+    , "n_channels": 3  // broadcast to "datasets", 1 for grayscale, 3 for color
+  
+    , "path": {
+      "root": "CAtt"     // "denoising" | "superresolution" | "masked_denoising"
+      , "pretrained_netG": null      // path of pretrained model
+      , "pretrained_netE": null      // path of pretrained model
+    }
+  
+    , "datasets": {
+      "train": {
+        "name": "train_dataset"                    // just name
+        , "dataset_type": "catt_denoising"       // "resnet101_sa_denoising" | "dncnn" | "dnpatch" | "fdncnn" | "ffdnet" | "sr" | "srmd" | "dpsr" | "plain" | "plainpatch" | "jpeg" | "masked_denoising"
+        , "dataroot_mae": "trainset/DFBW-224-Hnoise-mae"
+        , "dataroot_H": "trainset/DFBW-224"  // path of H training dataset. DIV2K + Flickr2K + BSD500 + WED
+        , "dataroot_L": "trainset/DFBW-224-Hnoise"       // path of L training dataset
+  
+        , "H_size": 224                   
+        , "lq_patchsize": 224        
+
+        , "dataloader_shuffle": true
+        , "dataloader_num_workers": 16
+        , "dataloader_batch_size": 64   // batch size, bigger is better
+    
+        
+      }
+      , "test": {
+        "name": "test_dataset"            // just name
+        , "dataset_type": "catt_denoising"        // "dncnn" | "dnpatch" | "fdncnn" | "ffdnet" | "sr" | "srmd" | "dpsr" | "plain" | "plainpatch" | "jpeg"
+        , "dataroot_mae": "testset/CBSD68-224-Gaussian-mae/noisy15"
+        , "dataroot_H": "testset/CBSD68-224-Gaussian/original_png"  // path of H testing dataset
+        , "dataroot_L": "testset/CBSD68-224-Gaussian/noisy15"    // path of L testing dataset, Poisson noise with alpha=2
+    
+      }
+    }
+  
+    , "netG": {
+      "net_type": "catt"
+    }
+  
+    , "train": {
+        "manual_seed": 1
+        
+      , "G_lossfn_type": "l1"               // "l1" preferred | "l2sum" | "l2" | "ssim" | "charbonnier"
+      , "G_lossfn_weight": 1.0            // default
+  
+      , "E_decay": 0.999                  // Exponential Moving Average for netG: set 0 to disable; default setting 0.999
+  
+      , "G_optimizer_type": "adam"        // fixed, adam is enough
+      , "G_optimizer_lr": 1e-4            // learning rate
+      , "G_optimizer_wd": 0               // weight decay, default 0
+      , "G_optimizer_clipgrad": null      // unused
+      , "G_optimizer_reuse": true         //
+  
+      , "G_scheduler_type": "MultiStepLR" // "MultiStepLR" is enough
+      , "G_scheduler_milestones": []   // [250000, 400000, 450000, 475000, 500000]
+      , "G_scheduler_gamma": 0.5
+  
+      , "G_regularizer_orthstep": null    // unused
+      , "G_regularizer_clipstep": null    // unused
+  
+      , "G_param_strict": true
+      , "E_param_strict": true
+  
+      , "checkpoint_test": 5000           // for testing
+      , "checkpoint_save": 5000           // for saving model
+      , "checkpoint_print": 100           // for print
+  
+      , "save_image": ["img_043_x1", "img_021_x1", "img_024_x1", "img_031_x1", "img_041_x1", "img_032_x1"]    // image names to be saved (tensorboard) during testing
+  
+    }
+  }
+  
